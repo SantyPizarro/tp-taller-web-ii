@@ -1,6 +1,6 @@
 # Lista de tareas
-TP para Taller Web II
-Instrucciones
+- TP para Taller Web II
+- Instrucciones:
 
 - Abrir la terminal dentro de la carpeta del proyecto (tp-taller-web-ii) y ejecutar: 
 
@@ -13,4 +13,4 @@ Instrucciones
 1. cd lista-de-tareas-api
 2. node index.js
 
-Acceder a la web en localhost:4200
+- Acceder a la web en localhost:4200
