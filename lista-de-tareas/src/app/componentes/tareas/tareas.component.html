@@ -1,0 +1,72 @@
+<div class="container">
+    <h2>Crear nueva tarea</h2>
+    <form (ngSubmit)="crearTarea()" class="task-form">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Título</mat-label>
+        <input matInput [(ngModel)]="titulo" name="titulo" required />
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <input matInput [(ngModel)]="descripcion" name="descripcion" required />
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Crear</button>
+    </form>
+  
+    <h2>Lista de tareas</h2>
+    <div class="task-list">
+      <div class="task-item" *ngFor="let tarea of tareas">
+        <div class="task-header">
+          <mat-checkbox
+            [checked]="tarea.completada"
+            (change)="alternarEstado(tarea)"
+          ></mat-checkbox>
+          <span [class.completed]="tarea.completada">{{ tarea.titulo }}</span>
+        </div>
+        <div class="task-body">
+          <p>{{ tarea.descripcion }}</p>
+          <div class="task-actions">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="activarEdicion(tarea)"
+              *ngIf="!modoEdicion[tarea.id]"
+            >
+              <mat-icon>Editar</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="eliminarTarea(tarea.id)"
+            >
+              <mat-icon>Eliminar</mat-icon>
+            </button>
+          </div>
+        </div>
+  
+        <!-- Modo edición -->
+        <div *ngIf="modoEdicion[tarea.id]" class="edit-mode">
+          <input
+            [(ngModel)]="tareaEditada[tarea.id].titulo"
+            placeholder="Editar título"
+            required
+          />
+          <input
+            [(ngModel)]="tareaEditada[tarea.id].descripcion"
+            placeholder="Editar descripción"
+            required
+          />
+          <div class="edit-actions">
+            <button mat-raised-button color="primary" (click)="guardarEdicion(tarea)">
+              Guardar
+            </button>
+            <button mat-raised-button color="warn" (click)="cancelarEdicion(tarea.id)">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
